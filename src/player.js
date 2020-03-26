@@ -1,5 +1,3 @@
-import Keyboard from "./keyboard";
-
 function Player(id, framesCount, initialSpeed, containerWidth) {
   this.domItem = document.getElementById(id);
   this.id = id;
@@ -11,7 +9,6 @@ function Player(id, framesCount, initialSpeed, containerWidth) {
   this.ticksPerFrame = 5;
   this.auto = true;
   this.containerWidth = containerWidth;
-  this.keyboard = new Keyboard();
 
   // Initial setup
   this.domItem.style.left = this.x + "px";
@@ -20,34 +17,24 @@ function Player(id, framesCount, initialSpeed, containerWidth) {
 
 Player.prototype = {
   update: function() {
-    var moveLeft = this.keyboard.isDown(this.keyboard.KEYS.LEFT);
-    var moveRight = this.keyboard.isDown(this.keyboard.KEYS.RIGHT);
-
-    if (moveLeft || moveRight) {
-      this.auto = false;
-      if (moveLeft) {
-        this.moveLeft();
-      } else if (moveRight) {
-        this.moveRight();
-      }
-    } else if (this.auto) {
+    if (this.auto) {
       this.moveRight();
     }
   },
 
-  moveLeft: function() {
+  moveLeft() {
     this.x -= this.speed;
     this.updateSpriteFrame();
     this.updatePosition();
   },
 
-  moveRight: function() {
+  moveRight() {
     this.x += this.speed;
     this.updateSpriteFrame();
     this.updatePosition();
   },
 
-  updateSpriteFrame: function() {
+  updateSpriteFrame() {
     this.tickCount++;
     if (this.tickCount >= this.ticksPerFrame) {
       this.frame = this.frame % this.framesCount === 0 ? 1 : this.frame + 1;
@@ -56,13 +43,24 @@ Player.prototype = {
     }
   },
 
-  updatePosition: function() {
+  updatePosition() {
     this.domItem.style.left = this.x + "px";
     if (this.x > this.containerWidth) {
       this.x = 0;
     } else if (this.x < 0) {
       this.x = this.containerWidth;
     }
+  },
+
+  /* Input commands */
+  inputLeft() {
+    this.auto = false;
+    this.moveLeft();
+  },
+
+  inputRight() {
+    this.auto = false;
+    this.moveRight();
   }
 };
 

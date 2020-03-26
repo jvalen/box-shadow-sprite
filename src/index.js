@@ -17,17 +17,31 @@ https://github.com/jvalen
   "font-family:monospace"
 );
 
-import Demo from "./demo";
+import actorCollection from "./actors";
+import inputHandler from "./input/inputHandler";
 import Player from "./player";
 
+const initInput = () => {
+  const input = inputHandler();
+  input.init();
+  return input;
+};
+
+const createActorCollection = inputHandler => {
+  const actors = actorCollection(inputHandler);
+  actors.addActor(new Player("css-sprite", 3, 2, window.innerWidth));
+  return actors;
+};
+
+const tick = actors => {
+  actors.update();
+  requestAnimationFrame(() => {
+    tick(actors);
+  });
+};
+
 window.addEventListener("load", function() {
-  var demo = new Demo();
-  demo.addBody(new Player("css-sprite", 3, 2, window.innerWidth));
-
-  function tick() {
-    demo.update();
-    requestAnimationFrame(tick);
-  }
-
-  tick();
+  const inputHandler = initInput();
+  const actors = createActorCollection(inputHandler);
+  tick(actors);
 });

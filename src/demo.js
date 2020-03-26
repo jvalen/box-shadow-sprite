@@ -1,6 +1,6 @@
 function Demo() {
   this.bodies = [];
-};
+}
 
 Demo.prototype = {
   update: function() {
@@ -11,5 +11,7 @@ Demo.prototype = {
 
   addBody: function(body) {
     this.bodies.push(body);
-  },
+  }
 };
+
+export default Demo;

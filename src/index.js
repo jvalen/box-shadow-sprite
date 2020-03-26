@@ -1,4 +1,5 @@
-console.log(`%c
+console.log(
+  `%c
   ██████╗███████╗███████╗    ███████╗██████╗ ██████╗ ██╗████████╗███████╗
  ██╔════╝██╔════╝██╔════╝    ██╔════╝██╔══██╗██╔══██╗██║╚══██╔══╝██╔════╝
  ██║     ███████╗███████╗    ███████╗██████╔╝██████╔╝██║   ██║   █████╗
@@ -7,22 +8,26 @@ console.log(`%c
   ╚═════╝╚══════╝╚══════╝    ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝
 BOX-SHADOW SPRITE
 
-Ninja gaiden CSS sprite created with http://pixelart.jvrpath.com/
+Ninja Gaiden CSS sprite created with https://www.pixelartcss.com/
 
 ©jvalen
 http://www.jvrpath.com/
 https://github.com/jvalen
 `,
-"font-family:monospace");
+  "font-family:monospace"
+);
+
+import Demo from "./demo";
+import Player from "./player";
 
 window.addEventListener("load", function() {
   var demo = new Demo();
-  demo.addBody(new Player('css-sprite', 3, 2, window.innerWidth));
+  demo.addBody(new Player("css-sprite", 3, 2, window.innerWidth));
 
   function tick() {
     demo.update();
     requestAnimationFrame(tick);
-  };
+  }
 
   tick();
 });

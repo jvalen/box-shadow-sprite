@@ -1,3 +1,5 @@
+import Keyboard from "./keyboard";
+
 function Player(id, framesCount, initialSpeed, containerWidth) {
   this.domItem = document.getElementById(id);
   this.id = id;
@@ -12,9 +14,9 @@ function Player(id, framesCount, initialSpeed, containerWidth) {
   this.keyboard = new Keyboard();
 
   // Initial setup
-  this.domItem.style.left = this.x + 'px';
+  this.domItem.style.left = this.x + "px";
   this.updateSpriteFrame();
-};
+}
 
 Player.prototype = {
   update: function() {
@@ -22,12 +24,12 @@ Player.prototype = {
     var moveRight = this.keyboard.isDown(this.keyboard.KEYS.RIGHT);
 
     if (moveLeft || moveRight) {
-        this.auto = false;
-        if (moveLeft) {
-          this.moveLeft();
-        } else if (moveRight) {
-          this.moveRight();
-        }
+      this.auto = false;
+      if (moveLeft) {
+        this.moveLeft();
+      } else if (moveRight) {
+        this.moveRight();
+      }
     } else if (this.auto) {
       this.moveRight();
     }
@@ -49,13 +51,13 @@ Player.prototype = {
     this.tickCount++;
     if (this.tickCount >= this.ticksPerFrame) {
       this.frame = this.frame % this.framesCount === 0 ? 1 : this.frame + 1;
-      this.domItem.className = this.id + '-' + this.frame;
+      this.domItem.className = this.id + "-" + this.frame;
       this.tickCount = 0;
     }
   },
 
   updatePosition: function() {
-    this.domItem.style.left = this.x + 'px';
+    this.domItem.style.left = this.x + "px";
     if (this.x > this.containerWidth) {
       this.x = 0;
     } else if (this.x < 0) {
@@ -63,3 +65,5 @@ Player.prototype = {
     }
   }
 };
+
+export default Player;

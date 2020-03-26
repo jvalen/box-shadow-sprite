@@ -13,4 +13,6 @@ function Keyboard() {
   };
 
   this.KEYS = { LEFT: 37, RIGHT: 39 };
-};
+}
+
+export default Keyboard;
